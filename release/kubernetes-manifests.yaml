@@ -627,7 +627,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.8.0
+        image: registry.hub.docker.com/vigregus/currencyservice:0.1
         ports:
         - name: grpc
           containerPort: 7000
