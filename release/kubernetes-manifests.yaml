@@ -186,7 +186,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.8.0
+        image: registry.hub.docker.com/vigregus/recommendationservice:0.1
         ports:
         - containerPort: 8080
         readinessProbe:
