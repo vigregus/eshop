@@ -59,8 +59,12 @@ pipeline {
                 //   app.push("$BUILD_NUMBER")
                 //   app.push("latest")
                 // }
-              dockerImage.push("$BUILD_NUMBER")
-              dockerImage.push('latest')  
+              //dockerImage.push("$BUILD_NUMBER")
+              //dockerImage.push('latest')  
+               docker.withRegistry('https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com', 'ecr:${AWS_DEFAULT_REGION}:aws-credentials') {
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                    }
             }
           }
         }
