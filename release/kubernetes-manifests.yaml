@@ -821,7 +821,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.8.0
+        image: registry.hub.docker.com/vigregus/adservice:0.1
         ports:
         - containerPort: 9555
         env:
