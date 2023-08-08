@@ -27,6 +27,7 @@ pipeline {
        stage('Building image') {
             steps{
               script {
+                cd src/frontend
                 dockerImage = docker.build registry + ":$BUILD_NUMBER"
               }
             }
