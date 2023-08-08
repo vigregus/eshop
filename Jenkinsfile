@@ -20,6 +20,8 @@ pipeline {
     environment {
         registry = "408937627166.dkr.ecr.eu-west-1.amazonaws.com/"
         registryCredential = 'dockerhub'
+        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
     }
 
     stages{
