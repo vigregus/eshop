@@ -34,6 +34,15 @@ pipeline {
             }
         }
         
+        stage('Building loadgenerator image') {
+            steps{
+              script {
+                dir('src/loadgenerator'){  
+                    dockerImage = docker.build registry + "loadgenerator:$BUILD_NUMBER"
+                } 
+              }
+            }
+        }
         stage('Logging into AWS ECR') {
             steps {
                 script {
