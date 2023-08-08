@@ -18,13 +18,13 @@ pipeline {
     }
 
     environment {
-        registry = "vigregus/frontend"
+        registry = "registry/hub.docker.com/vigregus"
         registryCredential = 'dockerhub'
     }
 
     stages{
 
-       stage('Building image') {
+       stage('Building frontend image') {
             steps{
               script {
                 dir('src/frontend'){  
@@ -34,13 +34,11 @@ pipeline {
             }
         }
         
-        stage('Deploy Image') {
+        stage('Deploy frontend Image') {
           steps{
             script {
-              docker.withRegistry( '', registryCredential ) {
-                dockerImage.push("$BUILD_NUMBER")
-                dockerImage.push('latest')
-              }
+              dockerImage.push("$BUILD_NUMBER")
+              dockerImage.push('latest')  
             }
           }
         }
