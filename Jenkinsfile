@@ -23,7 +23,7 @@ pipeline {
         
         AWS_ACCOUNT_ID = "408937627166"
         IMAGE_TAG = "latest"
-        IMAGE_REPO_NAME = "loadgenerator"
+        IMAGE_REPO_NAME = "frontend"
         AWS_DEFAULT_REGION = "eu-west-1"
     }
 
@@ -31,11 +31,11 @@ pipeline {
 
 
         
-        stage('Building loadgenerator image') {
+        stage('Building frontend image') {
             steps{
               script {
-                dir('src/loadgenerator'){  
-                    dockerImage = docker.build registry + "loadgenerator:$BUILD_NUMBER"
+                dir('src/frontend'){  
+                    dockerImage = docker.build registry + "frontend:$BUILD_NUMBER"
                 } 
               }
             }
