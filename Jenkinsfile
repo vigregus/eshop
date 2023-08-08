@@ -34,6 +34,26 @@ pipeline {
             }
         }
         
+        stage('Logging into AWS ECR') {
+            steps {
+                script {
+                    docker login -u AWS -p $(aws ecr get-login-password --region ${AWS_DEFAULT_REGION}) ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
+                    //sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+                        //aws ecr get-login-password --region eu-west-1             | docker login --username AWS --password-stdin 408937627166.dkr.ec
+                }
+ 
+            }
+        }
+        // Uploading Docker images into AWS ECR
+        stage('Pushing to ECR') {
+            steps{ 
+                script {
+                    sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+                    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                }
+            }
+        }
+
         stage('Deploy frontend Image') {
           steps{
             script {
