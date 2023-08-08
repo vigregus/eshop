@@ -18,7 +18,7 @@ pipeline {
     }
 
     environment {
-        registry = "vigregus"
+        registry = "408937627166.dkr.ecr.eu-west-1.amazonaws.com/"
         registryCredential = 'dockerhub'
     }
 
@@ -28,7 +28,7 @@ pipeline {
             steps{
               script {
                 dir('src/frontend'){  
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build registry + "frontend:$BUILD_NUMBER"
                 } 
               }
             }
