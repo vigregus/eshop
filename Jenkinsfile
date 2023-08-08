@@ -28,6 +28,8 @@ pipeline {
             steps{
               script {
                 cd src/frontend
+                ls -la
+                pwd
                 dockerImage = docker.build registry + ":$BUILD_NUMBER"
               }
             }
