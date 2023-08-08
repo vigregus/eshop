@@ -22,19 +22,15 @@ pipeline {
         registryCredential = 'dockerhub'
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+        AWS_ACCOUNT_ID = "408937627166"
+        IMAGE_TAG = "latest"
+        IMAGE_REPO_NAME = "loadgenerator"
+        AWS_DEFAULT_REGION = "eu-west-1"
     }
 
     stages{
 
-       stage('Building frontend image') {
-            steps{
-              script {
-                dir('src/frontend'){  
-                    dockerImage = docker.build registry + "frontend:$BUILD_NUMBER"
-                } 
-              }
-            }
-        }
+
         
         stage('Building loadgenerator image') {
             steps{
@@ -48,9 +44,7 @@ pipeline {
         stage('Logging into AWS ECR') {
             steps {
                 script {
-                    //docker login -u AWS -p $(aws ecr get-login-password --region ${AWS_DEFAULT_REGION}) ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
                     sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-                        //aws ecr get-login-password --region eu-west-1             | docker login --username AWS --password-stdin 408937627166.dkr.ec
                 }
  
             }
