@@ -18,7 +18,7 @@ pipeline {
     }
 
     environment {
-        registry = "registry/hub.docker.com/vigregus"
+        registry = "vigregus"
         registryCredential = 'dockerhub'
     }
 
