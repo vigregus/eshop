@@ -65,25 +65,7 @@ pipeline {
           }
         }
 	
-        stage('BUILD'){
-            steps {
-		script {
-			
-		    sh 'pwd'
-		    echo '))))_________))))))'	
-		}
-		
-		sh """
-  		export JAVA_HOME=/opt/java/openjdk/bin/java   
-                mvn clean install -DskipTests"""
-            }
-            post {
-                success {
-                    echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
-            }
-        }
+        
 
         stage('UNIT TEST'){
             steps {
