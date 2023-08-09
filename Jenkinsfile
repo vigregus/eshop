@@ -29,7 +29,7 @@ pipeline {
 
     stages{
 
-        stage{
+        stage('testing docker') {
             steps{
               script {
                 checkout scm
