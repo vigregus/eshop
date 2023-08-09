@@ -211,32 +211,7 @@ pipeline {
              
         }
 
-        
-        
-        
-        
-        
-        
 
-	stage('deploy to K8S with ArgoCD') {
-          steps{
-            script {
-            
-               withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                 sh 'docker push vigregus/frontend:$BUILD_NUMBER'
-               }
-            }
-          }
-        }
-        
-
-        
-
-
-
-        
-
- 
     }
     post {
         always {
