@@ -31,9 +31,9 @@ pipeline {
 
 
         
-        stage('Building frontend image') {
+        stage('Building images') {
             parralel {
-                stage {
+                stage('frontend') {
                     steps{
                         script {
                             dir('src/frontend'){  
@@ -43,7 +43,7 @@ pipeline {
                         }
                     }
                 }
-                stage {
+                stage('loadgenerator') {
                     steps{
                         script {
                             dir('src/loadgenerator'){  
