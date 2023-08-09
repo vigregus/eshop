@@ -81,6 +81,11 @@ pipeline {
             steps {
                 sh 'CODE ANALYSIS with SONARQUBE'
             }
+            post {
+                success {
+                    echo 'Generated Analysis Result'
+                }
+            }    
         }
         
         
