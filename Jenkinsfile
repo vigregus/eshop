@@ -81,17 +81,17 @@ pipeline {
                         }
                     }
                     
-                    
+                }
                     
                     stage('Push frontend Image') {
-                    steps{
-                        script {
-                        
-                        withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                            sh 'docker push vigregus/frontend:$BUILD_NUMBER'
+                        steps{
+                            script {
+                            
+                            withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
+                                sh 'docker push vigregus/frontend:$BUILD_NUMBER'
+                            }
+                            }
                         }
-                        }
-                    }
                     }
                 }
                 stage('loadgenerator') {
@@ -108,64 +108,12 @@ pipeline {
              
         }
 
-        // // Uploading Docker images into AWS ECR
-        // stage('Pushing to ECR') {
-        //     steps{ 
-        //         script {
-        //             sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
-        //             sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-        //         }
-        //     }
-        // }
-
-        stage('UNIT TEST'){
-            steps {
-                sh 'echo  UNIT test'
-            }
-        }
-
-        stage('INTEGRATION TEST'){
-            steps {
-                sh 'echo INTEGRATION TEST'
-            }
-        }
-
-        stage ('CODE ANALYSIS WITH CHECKSTYLE'){
-            steps {
-                sh 'echo CODE ANALYSIS WITH CHECKSTYLE'
-            }
-            post {
-                success {
-                    echo 'Generated Analysis Result'
-                }
-            }
-        }
-
-        stage('CODE ANALYSIS with SONARQUBE') {
-
-            steps {
-                sh 'echo CODE ANALYSIS with SONARQUBE'
-            }
-            post {
-                success {
-                    echo 'Generated Analysis Result'
-                }
-            }    
-        }
         
         
         
         
-        stage('Push frontend Image') {
-          steps{
-            script {
-            
-               withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                 sh 'docker push vigregus/frontend:$BUILD_NUMBER'
-               }
-            }
-          }
-        }
+        
+        
 
 	stage('deploy to K8S with ArgoCD') {
           steps{
