@@ -7,7 +7,7 @@ pipeline {
 
     agent {
 	    node {
-		 label 'master'
+		 label 'docker-agent'
 	    }
     }
 
@@ -64,7 +64,7 @@ pipeline {
                docker.withRegistry('https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com', 'ecr:${AWS_DEFAULT_REGION}:aws-credentials') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
-                    }
+                }
             }
           }
         }
@@ -120,11 +120,7 @@ pipeline {
 
 
 
-        stage('Remove Unused docker image') {
-          steps{
-            sh "docker rmi $registry:$BUILD_NUMBER"
-          }
-        }
+        
 
  
     }
