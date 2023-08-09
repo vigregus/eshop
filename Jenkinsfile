@@ -151,11 +151,11 @@ pipeline {
                 }
                 stage('cartservice') {
                     stages{    
-                        stage('cartservice') {
+                        stage('checkoutservice') {
                             steps{
                                 script {
-                                    dir('src/cartservice'){  
-                                    sh 'docker build . -t vigregus/cartservice:$BUILD_NUMBER'
+                                    dir('src/checkoutservice'){  
+                                    sh 'docker build . -t vigregus/checkoutservice:$BUILD_NUMBER'
                                 //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
                                     } 
                                 }
@@ -195,12 +195,12 @@ pipeline {
                                 }
                             }    
                         }
-                        stage('Push loadgenerator Image') {
+                        stage('Push checkoutservice Image') {
                             steps{
                                 script {
                                 
                                 withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                                    sh 'docker push vigregus/cartservice:$BUILD_NUMBER'
+                                    sh 'docker push vigregus/checkoutservice:$BUILD_NUMBER'
                                 }
                                 }
                             }
