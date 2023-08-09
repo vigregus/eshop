@@ -29,14 +29,7 @@ pipeline {
 
     stages{
 
-        stage('testing docker') {
-            steps{
-              script {
-                checkout scm
-                def customImage = docker.build
-              }
-            }
-        }
+
         
         stage('Building frontend image') {
             steps{
