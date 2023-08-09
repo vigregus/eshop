@@ -32,30 +32,29 @@ pipeline {
 
         
         stage('Building frontend image') {
-            parallel {
+            parralel {
                 stage {
                     steps{
                         script {
-                        
-                        dir('src/frontend'){  
+                            dir('src/frontend'){  
                             sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
                         //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
-                        } 
+                            } 
+                        }
                     }
-                }
                 }
                 stage {
                     steps{
                         script {
-                        
-                        dir('src/loadgenerator'){  
+                            dir('src/loadgenerator'){  
                             sh 'docker build . -t vigregus/loadgenerator:$BUILD_NUMBER'
                         //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
-                        } 
+                            } 
+                        }
                     }
                 }
-                }   
-            } 
+            }    
+             
         }
 
         // // Uploading Docker images into AWS ECR
