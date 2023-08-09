@@ -11,11 +11,11 @@ pipeline {
 	    }
     }
 
-	tools {
-        jdk 'OracleJDK11'
-	    maven 'MAVEN3'	
+	// tools {
+    //     // jdk 'OracleJDK11'
+	//     // maven 'MAVEN3'	
 		
-    }
+    // }
 
     environment {
         registry = "408937627166.dkr.ecr.eu-west-1.amazonaws.com/"
@@ -34,6 +34,7 @@ pipeline {
         stage('Building frontend image') {
             steps{
               script {
+                checkout scm
                 dir('src/frontend'){  
                     dockerImage = docker.build registry + "frontend:$BUILD_NUMBER"
                 } 
