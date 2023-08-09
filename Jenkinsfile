@@ -33,52 +33,53 @@ pipeline {
         
         stage('Building images') {
             parallel {
-                stages{
-                    stage('frontend') {
-                        steps{
-                            script {
-                                dir('src/frontend'){  
-                                sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
-                            //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
-                                } 
+                stage('frontend') {}
+                    stages{
+                        stage('frontend') {
+                            steps{
+                                script {
+                                    dir('src/frontend'){  
+                                    sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
+                                //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
+                                    } 
+                                }
                             }
                         }
-                    }
-                    stage('UNIT TEST'){
-                        steps {
-                            sh 'echo  UNIT test'
-                        }
-                    }
-
-                    stage('INTEGRATION TEST'){
-                        steps {
-                            sh 'echo INTEGRATION TEST'
-                        }
-                    }
-
-                    stage ('CODE ANALYSIS WITH CHECKSTYLE'){
-                        steps {
-                            sh 'echo CODE ANALYSIS WITH CHECKSTYLE'
-                        }
-                        post {
-                            success {
-                                echo 'Generated Analysis Result'
+                        stage('UNIT TEST'){
+                            steps {
+                                sh 'echo  UNIT test'
                             }
                         }
-                    }
 
-                    stage('CODE ANALYSIS with SONARQUBE') {
-
-                        steps {
-                            sh 'echo CODE ANALYSIS with SONARQUBE'
-                        }
-                        post {
-                            success {
-                                echo 'Generated Analysis Result'
+                        stage('INTEGRATION TEST'){
+                            steps {
+                                sh 'echo INTEGRATION TEST'
                             }
-                        }    
+                        }
+
+                        stage ('CODE ANALYSIS WITH CHECKSTYLE'){
+                            steps {
+                                sh 'echo CODE ANALYSIS WITH CHECKSTYLE'
+                            }
+                            post {
+                                success {
+                                    echo 'Generated Analysis Result'
+                                }
+                            }
+                        }
+
+                        stage('CODE ANALYSIS with SONARQUBE') {
+
+                            steps {
+                                sh 'echo CODE ANALYSIS with SONARQUBE'
+                            }
+                            post {
+                                success {
+                                    echo 'Generated Analysis Result'
+                                }
+                            }    
+                        }
                     }
-                    
                     
                     
                     
