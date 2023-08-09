@@ -79,21 +79,18 @@ pipeline {
                                 }
                             }    
                         }
-                    }
-                    
-                }
-                    
-                    stage('Push frontend Image') {
-                        steps{
-                            script {
-                            
-                            withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                                sh 'docker push vigregus/frontend:$BUILD_NUMBER'
-                            }
+                        stage('Push frontend Image') {
+                            steps{
+                                script {
+                                
+                                withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
+                                    sh 'docker push vigregus/frontend:$BUILD_NUMBER'
+                                }
+                                }
                             }
                         }
                     }
-                }
+                }    
                 stage('loadgenerator') {
                     steps{
                         script {
