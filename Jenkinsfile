@@ -32,15 +32,30 @@ pipeline {
 
         
         stage('Building frontend image') {
-            steps{
-              script {
-                checkout scm
-                dir('src/frontend'){  
-                    sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
-                    //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
-                } 
-              }
-            }
+            parallel {
+                stage {
+                    steps{
+                        script {
+                        
+                        dir('src/frontend'){  
+                            sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
+                        //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
+                        } 
+                    }
+                }
+                }
+                stage {
+                    steps{
+                        script {
+                        
+                        dir('src/loadgenerator'){  
+                            sh 'docker build . -t vigregus/loadgenerator:$BUILD_NUMBER'
+                        //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
+                        } 
+                    }
+                }
+                }   
+            } 
         }
 
         // // Uploading Docker images into AWS ECR
@@ -91,7 +106,7 @@ pipeline {
         
         
         
-        stage('Deploy frontend Image') {
+        stage('Push frontend Image') {
           steps{
             script {
             
@@ -101,7 +116,17 @@ pipeline {
             }
           }
         }
-	
+
+	stage('deploy to K8S with ArgoCD') {
+          steps{
+            script {
+            
+               withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
+                 sh 'docker push vigregus/frontend:$BUILD_NUMBER'
+               }
+            }
+          }
+        }
         
 
         
