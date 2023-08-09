@@ -33,14 +33,64 @@ pipeline {
         
         stage('Building images') {
             parallel {
-                stage('frontend') {
+                stages{
+                    stage('frontend') {
+                        steps{
+                            script {
+                                dir('src/frontend'){  
+                                sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
+                            //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
+                                } 
+                            }
+                        }
+                    }
+                    stage('UNIT TEST'){
+                        steps {
+                            sh 'echo  UNIT test'
+                        }
+                    }
+
+                    stage('INTEGRATION TEST'){
+                        steps {
+                            sh 'echo INTEGRATION TEST'
+                        }
+                    }
+
+                    stage ('CODE ANALYSIS WITH CHECKSTYLE'){
+                        steps {
+                            sh 'echo CODE ANALYSIS WITH CHECKSTYLE'
+                        }
+                        post {
+                            success {
+                                echo 'Generated Analysis Result'
+                            }
+                        }
+                    }
+
+                    stage('CODE ANALYSIS with SONARQUBE') {
+
+                        steps {
+                            sh 'echo CODE ANALYSIS with SONARQUBE'
+                        }
+                        post {
+                            success {
+                                echo 'Generated Analysis Result'
+                            }
+                        }    
+                    }
+                    
+                    
+                    
+                    
+                    stage('Push frontend Image') {
                     steps{
                         script {
-                            dir('src/frontend'){  
-                            sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
-                        //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
-                            } 
+                        
+                        withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
+                            sh 'docker push vigregus/frontend:$BUILD_NUMBER'
                         }
+                        }
+                    }
                     }
                 }
                 stage('loadgenerator') {
