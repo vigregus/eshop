@@ -67,7 +67,7 @@ pipeline {
             //         app.push("${env.BUILD_NUMBER}")
             //         app.push("latest")
             //     }
-               docker.withRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
+               withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
                  sh 'docker push vigregus/frontend:$BUILD_NUMBER'
                }
             }
