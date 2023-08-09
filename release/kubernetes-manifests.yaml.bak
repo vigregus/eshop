@@ -255,7 +255,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: registry.hub.docker.com/vigregus/frontend:16
+          image: registry.hub.docker.com/vigregus/frontend:13
           ports:
           - containerPort: 8080
           readinessProbe:
