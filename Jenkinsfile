@@ -79,7 +79,7 @@ pipeline {
         stage('CODE ANALYSIS with SONARQUBE') {
 
             steps {
-                sh 'CODE ANALYSIS with SONARQUBE'
+                sh 'echo CODE ANALYSIS with SONARQUBE'
             }
             post {
                 success {
