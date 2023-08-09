@@ -32,7 +32,7 @@ pipeline {
 
         
         stage('Building images') {
-            parralel {
+            parallel {
                 stage('frontend') {
                     steps{
                         script {
