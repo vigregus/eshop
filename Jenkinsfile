@@ -36,7 +36,8 @@ pipeline {
               script {
                 checkout scm
                 dir('src/frontend'){  
-                    dockerImage = docker.build registry + "frontend:$BUILD_NUMBER"
+                    sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
+                    //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
                 } 
               }
             }
@@ -67,7 +68,7 @@ pipeline {
             //         app.push("latest")
             //     }
                docker.withRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                dockerImage.push
+                 sh 'docker push vigregus/frontend:$BUILD_NUMBER'
                }
             }
           }
