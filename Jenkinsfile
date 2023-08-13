@@ -38,7 +38,7 @@ pipeline {
             parallel {
                 stage('frontend') {
                     stages{
-                        stage('get code'){
+                        stage('checkout'){
                             steps {
 
                                  script {
@@ -55,14 +55,12 @@ pipeline {
                                             }
                                             }
                                         }
-                                        }
-                                    }
-                                    }
-                                        
-                                        
-                                }  
+                                     }
                             }
                         }
+                                        
+                                        
+                        
                         stage('frontend') {
                             steps{
                                 script {
