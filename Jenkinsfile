@@ -85,9 +85,11 @@ pipeline {
                         stage('Push frontend Image') {
                             steps{
                                 script {
-                                  dockerImage = docker.build registry + ":$BUILD_NUMBER"  
-                                  docker.withRegistry("https://" + registry, "ecr:eu-central-1:" + registryCredential) {
-                                        dockerImage.push()
+                                  dir('src/frontend'){  
+                                    dockerImage = docker.build registry + ":$BUILD_NUMBER"  
+                                    docker.withRegistry("https://" + registry, "ecr:eu-central-1:" + registryCredential) {
+                                            dockerImage.push()
+                                    }
                                   }
                                 // withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
                                 //    // sh 'docker push vigregus/frontend:$BUILD_NUMBER'
