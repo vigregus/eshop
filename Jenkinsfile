@@ -85,7 +85,7 @@ pipeline {
                             steps{
                                 script {
                                   dir('src/frontend'){  
-                                    //dockerImage = docker.build registry + ":$BUILD_NUMBER"  
+
                                     docker.withRegistry("https://" + registry, "ecr:" + AWS_DEFAULT_REGION + ":" + registryCredential) {
                                             dockerImage.push()
                                     }
@@ -98,6 +98,17 @@ pipeline {
                                 }
                             }
                         }
+                        stage('apply to k8s manifest to allow argoCD update Image'){
+                            steps {
+                                dir('release'){
+                                    sh 'sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER!g\' kubernetes-manifests.yaml'
+                                    sh 'git add kubernetes-manifests.yaml'
+                                    sh 'git commit -m\"+$BUILD_NUMBER inkubernetes-manifest\"'
+                                    sh 'git push origin main'
+                                }
+                            }
+                        }
+
                     }
                 }
                 // stage('loadgenerator') {
