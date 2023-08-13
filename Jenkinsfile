@@ -1,8 +1,3 @@
-def COLOR_MAP = [
-    'SUCCESS': 'good', 
-    'FAILURE': 'danger',
-]
-
 pipeline {
 
     agent {
@@ -11,19 +6,14 @@ pipeline {
 	    }
     }
 
-	// tools {
-    //     // jdk 'OracleJDK11'
-	//     // maven 'MAVEN3'	
-		
-    // }
 
     environment {
         registry = '408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend'
         registryCredential = 'Aws-Jenkins'
         
-        AWS_ACCOUNT_ID = "408937627166"
-        IMAGE_TAG = "latest"
-        IMAGE_REPO_NAME = "frontend"
+        // AWS_ACCOUNT_ID = "408937627166"
+        // IMAGE_TAG = "latest"
+        // IMAGE_REPO_NAME = "frontend"
         AWS_DEFAULT_REGION = "eu-west-1"
 
        
@@ -38,26 +28,7 @@ pipeline {
             parallel {
                 stage('frontend') {
                     stages{
-                        // stage('checkout'){
-                        //     steps {
-
-                        //          script {
-                                        
-                        //                     timeout(time:10, unit: 'MINUTES') {
-                        //                     waitUntil {//do checkout until it is successful
-                        //                     try {
-                        //                         checkout([$class: 'GitSCM', branches: [[name: main]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_jenkins', url: 'https://github.com/vigregus/eshop.git']]])
-                        //                         true
-                        //                     } catch(err) {
-                        //                         echo "Failed to checkout from Git. Will try again in 30 sec"
-                        //                         sleep(30)
-                        //                         false
-                        //                     }
-                        //                     }
-                        //                 }
-                        //              }
-                        //     }
-                        // }
+                        
                         stage('checkout'){
                             steps{
                                 script{
@@ -139,7 +110,7 @@ pipeline {
                                         
                                 }    
                                 sh "sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER!g\' release/kubernetes-manifests.yaml"
-                                //sh 'cat release/kubernetes-manifests.yaml'
+
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                         
                                         sh 'git add release/kubernetes-manifests.yaml'
@@ -155,122 +126,7 @@ pipeline {
 
                     }
                 }
-                // stage('loadgenerator') {
-                //     stages{    
-                //         stage('loadgenerator') {
-                //             steps{
-                //                 script {
-                //                     dir('src/loadgenerator'){  
-                //                     sh 'docker build . -t vigregus/loadgenerator:$BUILD_NUMBER'
-                //                 //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
-                //                     } 
-                //                 }
-                //             }
-                //         }
-                //         stage('UNIT TEST'){
-                //             steps {
-                //                 sh 'echo  UNIT test'
-                //             }
-                //         }
-
-                //         stage('INTEGRATION TEST'){
-                //             steps {
-                //                 sh 'echo INTEGRATION TEST'
-                //             }
-                //         }
-
-                //         stage ('CODE ANALYSIS WITH CHECKSTYLE'){
-                //             steps {
-                //                 sh 'echo CODE ANALYSIS WITH CHECKSTYLE'
-                //             }
-                //             post {
-                //                 success {
-                //                     echo 'Generated Analysis Result'
-                //                 }
-                //             }
-                //         }
-
-                //         stage('CODE ANALYSIS with SONARQUBE') {
-
-                //             steps {
-                //                 sh 'echo CODE ANALYSIS with SONARQUBE'
-                //             }
-                //             post {
-                //                 success {
-                //                     echo 'Generated Analysis Result'
-                //                 }
-                //             }    
-                //         }
-                //         stage('Push loadgenerator Image') {
-                //             steps{
-                //                 script {
-                                
-                //                 withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                //                     sh 'docker push vigregus/loadgenerator:$BUILD_NUMBER'
-                //                 }
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
-                // stage('cartservice') {
-                //     stages{    
-                //         stage('checkoutservice') {
-                //             steps{
-                //                 script {
-                //                     dir('src/checkoutservice'){  
-                //                     sh 'docker build . -t vigregus/checkoutservice:$BUILD_NUMBER'
-                //                 //dockerImage = docker.build + "vigregus/frontend:$BUILD_NUMBER"
-                //                     } 
-                //                 }
-                //             }
-                //         }
-                //         stage('UNIT TEST'){
-                //             steps {
-                //                 sh 'echo  UNIT test'
-                //             }
-                //         }
-
-                //         stage('INTEGRATION TEST'){
-                //             steps {
-                //                 sh 'echo INTEGRATION TEST'
-                //             }
-                //         }
-
-                //         stage ('CODE ANALYSIS WITH CHECKSTYLE'){
-                //             steps {
-                //                 sh 'echo CODE ANALYSIS WITH CHECKSTYLE'
-                //             }
-                //             post {
-                //                 success {
-                //                     echo 'Generated Analysis Result'
-                //                 }
-                //             }
-                //         }
-
-                //         stage('CODE ANALYSIS with SONARQUBE') {
-
-                //             steps {
-                //                 sh 'echo CODE ANALYSIS with SONARQUBE'
-                //             }
-                //             post {
-                //                 success {
-                //                     echo 'Generated Analysis Result'
-                //                 }
-                //             }    
-                //         }
-                //         stage('Push checkoutservice Image') {
-                //             steps{
-                //                 script {
-                                
-                //                 withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                //                     sh 'docker push vigregus/checkoutservice:$BUILD_NUMBER'
-                //                 }
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
+                
             }    
              
         }
