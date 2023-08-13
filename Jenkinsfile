@@ -85,7 +85,7 @@ pipeline {
                             steps{
                                 script {
                                   dir('src/frontend'){  
-                                    dockerImage = docker.build registry + ":$BUILD_NUMBER"  
+                                    //dockerImage = docker.build registry + ":$BUILD_NUMBER"  
                                     docker.withRegistry("https://" + registry, "ecr:" + AWS_DEFAULT_REGION + ":" + registryCredential) {
                                             dockerImage.push()
                                     }

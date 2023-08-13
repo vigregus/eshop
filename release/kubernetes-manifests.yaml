@@ -255,7 +255,9 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: registry.hub.docker.com/vigregus/frontend:19
+          image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:34
+          imagePullSecrets:
+          - name: regcred
           ports:
           - containerPort: 8080
           readinessProbe:
