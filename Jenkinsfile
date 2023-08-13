@@ -25,7 +25,7 @@ pipeline {
         IMAGE_TAG = "latest"
         IMAGE_REPO_NAME = "frontend"
         AWS_DEFAULT_REGION = "eu-west-1"
-        environment 
+
        
 
     }
