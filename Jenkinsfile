@@ -21,6 +21,7 @@ pipeline {
                             steps{
                                 script{
                                     checkout scm env.BRANCH_NAME
+                                    sh 'git branch'
                                 }
                             }
                         }
