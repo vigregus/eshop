@@ -82,12 +82,13 @@ pipeline {
                         stage('Push frontend Image') {
                             steps{
                                 script {
-                                
-                                withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                                   // sh 'docker push vigregus/frontend:$BUILD_NUMBER'
-                                   sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:$BUILD_NUMBER"
+                                  sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:$BUILD_NUMBER"
  
-                                }
+                                // withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
+                                //    // sh 'docker push vigregus/frontend:$BUILD_NUMBER'
+                                //    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:$BUILD_NUMBER"
+ 
+                                // }
                                 }
                             }
                         }
