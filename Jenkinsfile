@@ -42,8 +42,7 @@ pipeline {
                             steps{
                                 script {
                                     dir('src/frontend'){  
-                                      sh 'docker build -f Dockerfile . -t 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER'
-                                
+                                      dockerImage = docker.build registry + ":$BUILD_NUMBER"  
                                     } 
                                 }
                             }
