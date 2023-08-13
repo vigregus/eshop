@@ -101,13 +101,13 @@ pipeline {
                         stage('apply to k8s manifest to allow argoCD update Image'){
                             steps {
                                 
-                                sh 'sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER!g\' release/kubernetes-manifests.yaml'
+                                sh 'sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:' +$BUILD_NUMBER+'!g\' release/kubernetes-manifests.yaml'
                                 sh 'cat release/kubernetes-manifests.yaml'
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                         sh 'git config user.email "vigregus@gmail.com"'
                                         sh 'git add release/kubernetes-manifests.yaml'
                                         sh 'git commit --message=qwe'
-                                        sh 'git log'
+                                        sh 'git log -10'
                                         sh 'git push origin main'
                                     }
                                     
