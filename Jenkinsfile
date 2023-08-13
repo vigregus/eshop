@@ -132,6 +132,7 @@ pipeline {
                             steps {
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                         sh 'git config user.email "vigregus@gmail.com"'
+                                        sh 'git config user.name "vigregus"'
                                         sh 'git switch main'
                                         sh 'git branch'
                                         sh 'git log -3'
@@ -144,7 +145,7 @@ pipeline {
                                         sh 'git add release/kubernetes-manifests.yaml'
                                         sh 'git commit --message=qwe'
                                         sh 'git log -3'
-                                        sh 'git push origin buildnumber'
+                                        sh 'git push origin main'
                                     }
                                     
                                 
