@@ -88,7 +88,7 @@ pipeline {
                                     sh 'git config user.email "vigregus@gmail.com"'
                                     sh 'git config user.name "vigregus"'
                                     sh 'echo ' + env.BRANCH_NAME
-                                    sh 'git switch env.BRANCH_NAME'
+                                    sh 'git switch ' + env.BRANCH_NAME
                                     sh 'git pull'    
                                 }    
                                 sh "sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER!g\' release/kubernetes-manifests.yaml"
@@ -96,7 +96,7 @@ pipeline {
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                     sh 'git add release/kubernetes-manifests.yaml'
                                     sh 'git commit --message=qwe'
-                                    sh 'git push origin $branch'
+                                    sh 'git push origin ' + env.BRANCH_NAME
                                 }            
                             }
                         }
