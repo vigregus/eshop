@@ -102,9 +102,12 @@ pipeline {
                             steps {
                                 dir('release'){
                                     sh 'sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER!g\' kubernetes-manifests.yaml'
-                                    sh 'git add kubernetes-manifests.yaml'
-                                    sh 'git commit -m\"+$BUILD_NUMBER inkubernetes-manifest\"'
-                                    sh 'git push origin main'
+                                    withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
+                                            sh 'git add kubernetes-manifests.yaml'
+                                            sh 'git commit -m\"+$BUILD_NUMBER inkubernetes-manifest\"'
+                                            sh 'git push origin main'
+                                        }
+                                    
                                 }
                             }
                         }
