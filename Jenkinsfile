@@ -282,7 +282,7 @@ pipeline {
 
             echo 'clean workspace'
             sh 'pwd'
-            sh 'rm -rf /var/lib/jenkins/workspace/eshop_main'
+            //sh 'rm -rf /var/lib/jenkins/workspace/eshop_main'
             //
             // slackSend channel: '#jenkins-cicd',
             //     color: COLOR_MAP[currentBuild.currentResult],
