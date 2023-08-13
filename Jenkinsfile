@@ -21,7 +21,7 @@ pipeline {
                             steps{
                                 script{
                                     echo 'Pulling...' + env.BRANCH_NAME
-                                    checkout scm env.BRANCH_NAME
+                                    checkout scm 
                                     sh 'git branch'
                                 }
                             }
