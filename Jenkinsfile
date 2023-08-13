@@ -146,7 +146,8 @@ pipeline {
                                         sh 'git commit --message=qwe'
                                         sh 'git log -3'
                                         sh 'git push origin main'
-                                        sh 'pwd'
+                                        sh 'rm -rf /var/lib/jenkins/workspace/eshop_main'
+
                                     }
                                     
                                 
