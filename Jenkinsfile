@@ -91,7 +91,7 @@ pipeline {
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                     sh 'git add release/kubernetes-manifests.yaml'
                                     sh 'git commit --message=qwe'
-                                    sh 'git push origin main'
+                                    sh 'git push origin env.BRANCH_NAME'
                                 }            
                             }
                         }
