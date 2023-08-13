@@ -39,7 +39,7 @@ pipeline {
                             steps{
                                 script {
                                     dir('src/frontend'){  
-                                      sh 'docker build . -t vigregus/frontend:$BUILD_NUMBER'
+                                      sh 'docker build -f Dockerfile . -t vigregus/frontend:$BUILD_NUMBER'
                                 
                                     } 
                                 }
