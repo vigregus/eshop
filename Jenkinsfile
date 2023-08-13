@@ -18,13 +18,16 @@ pipeline {
     // }
 
     environment {
-        registry = "408937627166.dkr.ecr.eu-west-1.amazonaws.com/"
-        registryCredential = 'dockerhub'
+        registry = '408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend'
+        registryCredential = 'Aws-Jenkins'
         
         AWS_ACCOUNT_ID = "408937627166"
         IMAGE_TAG = "latest"
         IMAGE_REPO_NAME = "frontend"
         AWS_DEFAULT_REGION = "eu-west-1"
+        environment 
+       
+
     }
 
     stages{
@@ -82,7 +85,9 @@ pipeline {
                         stage('Push frontend Image') {
                             steps{
                                 script {
-                                  sh "docker push 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER"
+                                  dockerImage = docker.build registry + ":$BUILD_NUMBER"  
+                                  docker.withRegistry("https://" + registry, "ecr:eu-central-1:" + registryCredential) {
+                                        dockerImage.push()
  
                                 // withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
                                 //    // sh 'docker push vigregus/frontend:$BUILD_NUMBER'
