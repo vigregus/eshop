@@ -125,7 +125,7 @@ pipeline {
                             steps {
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                         sh 'git config user.email "vigregus@gmail.com"'
-                                        sh "git checkout -b'buldnumber'"
+                                        //sh "git checkout -b'buldnumber'"
                                         
                                 }    
                                 sh "sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER!g\' release/kubernetes-manifests.yaml"
