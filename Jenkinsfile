@@ -87,7 +87,7 @@ pipeline {
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                     sh 'git config user.email "vigregus@gmail.com"'
                                     sh 'git config user.name "vigregus"'
-                                    sh 'echo env.BRANCH_NAME'
+                                    sh 'echo ' + env.BRANCH_NAME
                                     sh 'git switch env.BRANCH_NAME'
                                     sh 'git pull'    
                                 }    
