@@ -38,26 +38,26 @@ pipeline {
             parallel {
                 stage('frontend') {
                     stages{
-                        stage('checkout'){
-                            steps {
+                        // stage('checkout'){
+                        //     steps {
 
-                                 script {
+                        //          script {
                                         
-                                            timeout(time:10, unit: 'MINUTES') {
-                                            waitUntil {//do checkout until it is successful
-                                            try {
-                                                checkout([$class: 'GitSCM', branches: [[name: main]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_jenkins', url: 'https://github.com/vigregus/eshop.git']]])
-                                                true
-                                            } catch(err) {
-                                                echo "Failed to checkout from Git. Will try again in 30 sec"
-                                                sleep(30)
-                                                false
-                                            }
-                                            }
-                                        }
-                                     }
-                            }
-                        }
+                        //                     timeout(time:10, unit: 'MINUTES') {
+                        //                     waitUntil {//do checkout until it is successful
+                        //                     try {
+                        //                         checkout([$class: 'GitSCM', branches: [[name: main]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_jenkins', url: 'https://github.com/vigregus/eshop.git']]])
+                        //                         true
+                        //                     } catch(err) {
+                        //                         echo "Failed to checkout from Git. Will try again in 30 sec"
+                        //                         sleep(30)
+                        //                         false
+                        //                     }
+                        //                     }
+                        //                 }
+                        //              }
+                        //     }
+                        // }
                                         
                                         
                         
