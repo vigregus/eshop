@@ -256,8 +256,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:34
-          imagePullSecrets:
-          - name: regcred
+          
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -310,6 +309,8 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
+      imagePullSecrets:
+          - name: regcred
 ---
 apiVersion: v1
 kind: Service
