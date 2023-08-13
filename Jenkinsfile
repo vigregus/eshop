@@ -46,7 +46,7 @@ pipeline {
                                             timeout(time:10, unit: 'MINUTES') {
                                             waitUntil {//do checkout until it is successful
                                             try {
-                                                checkout([$class: 'GitSCM', branches: [[name: main]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_jenkins', url: https://github.com/vigregus/eshop.git]]])
+                                                checkout([$class: 'GitSCM', branches: [[name: main]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_jenkins', url: 'https://github.com/vigregus/eshop.git']]])
                                                 true
                                             } catch(err) {
                                                 echo "Failed to checkout from Git. Will try again in 30 sec"
