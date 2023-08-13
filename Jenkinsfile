@@ -87,7 +87,7 @@ pipeline {
                                 script {
                                   dir('src/frontend'){  
                                     dockerImage = docker.build registry + ":$BUILD_NUMBER"  
-                                    docker.withRegistry("https://" + registry, "ecr:eu-west-1:" + registryCredential) {
+                                    docker.withRegistry("https://" + registry, "ecr:" + AWS_DEFAULT_REGION + ":" + registryCredential) {
                                             dockerImage.push()
                                     }
                                   }
