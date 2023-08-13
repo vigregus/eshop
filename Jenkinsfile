@@ -105,7 +105,7 @@ pipeline {
                                     withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                             sh 'git config user.email "vigregus@gmail.com"'
                                             sh 'git add kubernetes-manifests.yaml'
-                                            sh 'git commit --allow-empty-message --no-edit'
+                                            sh 'git commit --message=qwe'
                                             sh 'git push origin main'
                                         }
                                     
