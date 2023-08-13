@@ -146,6 +146,7 @@ pipeline {
                                         sh 'git commit --message=qwe'
                                         sh 'git log -3'
                                         sh 'git push origin main'
+                                        sh 'pwd'
                                     }
                                     
                                 
