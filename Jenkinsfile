@@ -134,8 +134,8 @@ pipeline {
                                         sh 'git config user.email "vigregus@gmail.com"'
                                         sh 'git config user.name "vigregus"'
                                         sh 'git switch main'
-                                        sh 'git branch'
-                                        sh 'git log -3'
+                                        sh 'git pull'
+
                                         
                                 }    
                                 sh "sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER!g\' release/kubernetes-manifests.yaml"
@@ -144,7 +144,6 @@ pipeline {
                                         
                                         sh 'git add release/kubernetes-manifests.yaml'
                                         sh 'git commit --message=qwe'
-                                        sh 'git log -3'
                                         sh 'git push origin main'
                                         
 
