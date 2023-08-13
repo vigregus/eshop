@@ -84,7 +84,9 @@ pipeline {
                                 script {
                                 
                                 withDockerRegistry([ credentialsId: "dockerhubcreds", url: "" ]){
-                                    sh 'docker push vigregus/frontend:$BUILD_NUMBER'
+                                   // sh 'docker push vigregus/frontend:$BUILD_NUMBER'
+                                   sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+ 
                                 }
                                 }
                             }
