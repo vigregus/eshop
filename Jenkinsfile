@@ -146,7 +146,7 @@ pipeline {
                                         sh 'git commit --message=qwe'
                                         sh 'git log -3'
                                         sh 'git push origin main'
-                                        sh 'rm -rf /var/lib/jenkins/workspace/eshop_main'
+                                        
 
                                     }
                                     
@@ -283,6 +283,7 @@ pipeline {
 
             echo 'clean workspace'
             sh 'pwd'
+            sh 'rm -rf /var/lib/jenkins/workspace/eshop_main'
             //
             // slackSend channel: '#jenkins-cicd',
             //     color: COLOR_MAP[currentBuild.currentResult],
