@@ -1,4 +1,6 @@
 //Jenkins file for AWS ECR and  Argo 
+def branch = "${BRANCH_NAME}"
+
 pipeline {
 
     agent {
