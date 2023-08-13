@@ -22,7 +22,7 @@ pipeline {
         registryCredential = 'dockerhub'
         
         AWS_ACCOUNT_ID = "408937627166"
-        IMAGE_TAG = "latest"
+        IMAGE_TAG = $BUILD_NUMBER
         IMAGE_REPO_NAME = "frontend"
         AWS_DEFAULT_REGION = "eu-west-1"
     }
