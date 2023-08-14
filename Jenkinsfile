@@ -1,4 +1,6 @@
 //Jenkins file for AWS ECR and  Argo 
+def branch = "${BRANCH_NAME}"
+
 pipeline {
 
     agent {
@@ -20,7 +22,9 @@ pipeline {
                         stage('checkout'){
                             steps{
                                 script{
-                                    checkout scm
+                                    echo 'Pulling...' + env.BRANCH_NAME
+                                    checkout scm 
+                                    sh 'git branch'
                                 }
                             }
                         }
@@ -83,7 +87,8 @@ pipeline {
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                     sh 'git config user.email "vigregus@gmail.com"'
                                     sh 'git config user.name "vigregus"'
-                                    sh 'git switch main'
+                                    sh 'echo ' + env.BRANCH_NAME
+                                    sh 'git switch ' + env.BRANCH_NAME
                                     sh 'git pull'    
                                 }    
                                 sh "sed -i.backup \'s!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:.*!image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:$BUILD_NUMBER!g\' release/kubernetes-manifests.yaml"
@@ -91,7 +96,7 @@ pipeline {
                                 withCredentials([gitUsernamePassword(credentialsId: 'github_jenkins', gitToolName: 'git')]) {
                                     sh 'git add release/kubernetes-manifests.yaml'
                                     sh 'git commit --message=qwe'
-                                    sh 'git push origin main'
+                                    sh 'git push origin ' + env.BRANCH_NAME
                                 }            
                             }
                         }
