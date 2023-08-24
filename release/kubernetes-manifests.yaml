@@ -256,9 +256,9 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
 <<<<<<< HEAD
-          image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:679
+          image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:680
 =======
-          image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:679
+          image: 408937627166.dkr.ecr.eu-west-1.amazonaws.com/frontend:680
 >>>>>>> feature/add-new-svc
           ports:
           - containerPort: 8080
